@@ -5,7 +5,11 @@ import App from '@/App';
 import baseRoutes from '@/router';
 import { log } from '@/lib/debug';
 import { loadInterceptors } from '@/utils/request';
-import { initSingle, isSingle } from '@/lib/subApp/singleBootstrap';
+import {
+  initSingle,
+  isSingle,
+  bindInstance
+} from '@/lib/subApp/singleBootstrap';
 export {
   bootstrap,
   update,
@@ -28,6 +32,7 @@ function render(props = {}) {
 
   store.commit('systems/initState', { appName, routesPrefix, visible: true });
 
+  bindInstance({ router });
   loadInterceptors({ router, store });
 
   const instance = new Vue({

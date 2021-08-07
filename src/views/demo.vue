@@ -9,6 +9,9 @@
       <a-input v-model="data" type="text" />
       <a-button @click="send">给 Home 发送数据</a-button>
     </a-space>
+    <a-space>
+      <a-button @click="goAndSend">跳转到 /app2/demo 并且传递数据</a-button>
+    </a-space>
   </a-space>
 </template>
 
@@ -26,6 +29,9 @@ export default {
     send() {
       this.$microSendNotice(this.data, '/', true);
       this.$message.success('给 Home 发送了数据，请点击 “Go Home” 查看效果');
+    },
+    goAndSend() {
+      this.$microGoto('/app2/demo', '子应用跳转并且传递数据');
     },
     async goApi() {
       const data = await getRoutesConfig();

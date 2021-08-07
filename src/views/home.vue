@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a-space direction="vertical">
+    <a-space direction="vertical" @click="emitGlobal">
       <div v-if="hasNotice">
         <a-alert message="收到传递过来的信息" type="success" show-icon />
         {{ $root.noticeState }}
@@ -42,10 +42,7 @@ export default {
     },
     emitGlobal() {
       console.log('通知主应用');
-      this.$store.commit('global/emit', {
-        method: 'test',
-        name: Number(new Date()),
-      });
+      this.$microSendNotice('通知主应用', '/demo');
     },
   },
 };
